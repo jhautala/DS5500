@@ -1,0 +1,26 @@
+Skills:
+	Languages: Java, TypeScript/JavaScript, Python, R
+	Libraries: Jackson/Guava, D3, pandas/numpy/sklearn, dplyr
+	Frameworks: JAX-RS, Angular
+	Databases: PostgreSQL, Solr, Prometheus, Splunk
+	Infrastructure: AWS (S3, RDS, EC2, Lambda)
+	Build/Deploy: Jenkins, GitHub (Actions, Runner), Salt, Docker
+
+Work Experience:
+	IDEXX Laboratories: Programmer Analyst -> Programmer Analyst Sr
+	Tyler Technologies: Software Support Specialist -> Software Developer
+
+Interests:
+	Music performance and audio recording/production
+	Statistical analysis and data visualization
+	Procedural Art and Generative AI (largely uninitiated, but curious)
+
+In my most recent work experience (Programmer Analyst Sr, IDEXX) I have had the opportunity to grow my technical toolkit very broadly, in the context of a fairly autonomous, full-stack, internal software development team, designing and maintaining:
+* infrastructure
+* persistence
+* web services
+* user interfaces
+
+My most recent academic experience has afforded two parallel paths of growth, expanding the depth and rigor of my computer science and mathematical knowledge, while also building a solid foundation in the tools and techniques of practicing data science.
+
+I see my nascent/amateur interest in audio/visual technology and DSP as a natural extension of my interest in data science and artificial intelligence. Also, as a long time musician with a fair amount of experience in independent music production, I hope to leverage some domain knowledge to improve my productivity in analysis and modeling tasks concerned with musical audio information. That said, I look forward to learning more about less familiar domains (e.g. image/video processing, GIS, and scientific/medical measurement/assay data).
