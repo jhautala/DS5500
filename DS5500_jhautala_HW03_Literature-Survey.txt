@@ -1,0 +1,107 @@
+General overview:
+
+	H. Purwins, B. Li, T. Virtanen, J. Schlüter, S. -Y. Chang and T. Sainath, "Deep Learning for Audio Signal Processing," in IEEE Journal of Selected Topics in Signal Processing, vol. 13, no. 2, pp. 206-219, May 2019, doi: 10.1109/JSTSP.2019.2908700.
+
+	Y. Bayle, “Deep learning for music,” 2018. [Online]. Available:
+	https://github.com/ybayle/awesome-deep-learning-music
+
+Datasets:
+
+	"Million Song Dataset":
+		Thierry Bertin-Mahieux, Daniel P.W. Ellis, Brian Whitman, and Paul Lamere. 
+		The Million Song Dataset. In Proceedings of the 12th International Society
+		for Music Information Retrieval Conference (ISMIR 2011), 2011.
+
+		“Million Song Dataset,” [Online],
+		Available: https://labrosa.ee.columbia.edu/millionsong/,
+		Accessed on: Jan. 15, 2019.
+
+	MagnaTagATune:
+		https://mirg.city.ac.uk/codeapps/the-magnatagatune-dataset
+
+	MTG-Jamendo:
+		https://mtg.github.io/mtg-jamendo-dataset/
+
+	Example annotation encodings:
+		description:
+			http://isophonics.net/content/reference-annotations
+
+		software:
+			https://www.sonicvisualiser.org/
+
+		“Reference Annotations: The Beatles,” [Online].
+		Available: http://isophonics.net/content/reference-annotations-beatles,
+		Accessed on: Jan. 15, 2019.
+
+Steps:
+
+	1. extract notes from complex musical audio
+
+		aka:
+			fundamental frequency feature extraction
+			note segmentation
+
+		In preliminary investigation, particularly in support of solutions that rely on the distinction between natural harmonics and tempered scales, high frequency resolution is presumed to be required. After applying STFT and HPSS preprocessing (leveraging the Python library librosa), I have implemented frequency resolution refinement via QISP, per this description:
+
+			J.O. Smith, "Quadratic Interpolation of Spectral Peaks", in
+			Spectral Audio Signal Processing, online book,
+			Stanford University, 2011 edition. [Online].
+			Available: http://ccrma.stanford.edu/~jos/sasp/Quadratic_Interpolation_Spectral_Peaks.html.
+			Accessed: Jan. 30, 2024.
+
+		Comparison of multiple techniques:
+			Bay, M., Ehmann, A. F., & Downie, J. S. (2009, October). Evaluation of multiple-f0 estimation and tracking systems. In ISMIR (pp. 315-320).
+
+		older:
+			T. Tolonen and M. Karjalainen, "A computationally efficient multipitch analysis model," in IEEE Transactions on Speech and Audio Processing, vol. 8, no. 6, pp. 708-716, Nov. 2000, doi: 10.1109/89.876309.
+
+		looking for overtones:
+			Klapuri, A. (2006, October). Multiple fundamental frequency estimation by summing harmonic amplitudes. In ISMIR (pp. 216-221).
+
+		iterative and contextual:
+			Barbedo, Jayme & Lopes, Amauri & Wolfe, Patrick. (2007). High Time-Resolution Estimation of Multiple Fundamental Frequencies.. Proceedings of the 8th International Conference on Music Information Retrieval, ISMIR 2007. 399-402. 
+
+		non-negative matrix factorization (NMF):
+			Heittola, T., Klapuri, A., & Virtanen, T. (2009, October). Musical instrument recognition in polyphonic audio using source-filter model for sound separation. In ISMIR (pp. 327-332).
+
+		deep learning:
+			Bittner, R. M., McFee, B., Salamon, J., Li, P., & Bello, J. P. (2017, October). Deep Salience Representations for F0 Estimation in Polyphonic Music. In ISMIR (pp. 63-70).
+
+		Filter-based:
+
+			M. Won, S. Chun, O. Nieto and X. Serrc, "Data-Driven Harmonic Filters for Audio Representation Learning," ICASSP 2020 - 2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), Barcelona, Spain, 2020, pp. 536-540, doi: 10.1109/ICASSP40776.2020.9053669.
+
+		Another non-negative matrix factorization (NMF):
+
+			Mariotte, T., Almudévar, A., Tahon, M., & Ortega, A. (2024). An explainable proxy model for multi-label audio segmentation. arXiv. https://arxiv.org/abs/2401.08268
+
+		A more specific example (i.e. flamenco singing, with guitar accompaniment):
+
+			Gómez, E., Canadas-Quesada, F. J., Salamon, J., Bonada, J., Vera-Candeas, P., & Molero, P. C. (2012, October). Predominant Fundamental Frequency Estimation vs Singing Voice Separation for the Automatic Transcription of Accompanied Flamenco Singing. In ISMIR (pp. 601-606).
+
+	2. extract chords from note information
+
+		Chord detection:
+
+			Mauch, M., & Dixon, S. (2010, August). Approximate Note Transcription for the Improved Identification of Difficult Chords. In ISMIR (pp. 135-140).
+
+	3. treat a library of songs as a corpus of texts composed of chords
+
+		This should be fairly straightforward to ingest a text representation of the corpus using text processing concepts possibly including IFDF, BM25, and n-gram models.
+
+		Speculation:
+			Supposing we get this far and manage to extract somewhat coherent chord sequence information. It may be interesting to consider using LSTM and transformer models, perhaps to improve quality of results and generate continuations, respectively.
+
+	4. use text analysis techniques to:
+		* extract topics from the corpus and categorize items in terms of topics
+		* compare items for similarity and implement "song similarity search" functionality
+
+		possibly compare with alternate tagging systems:
+			Won, M., Ferraro, A., Bogdanov, D., & Serra, X. (2020). Evaluation of cnn-based automatic music tagging models. arXiv preprint arXiv:2006.00751.
+
+Additional:
+
+	In the interest of simplicity, I am not currently planning to focus on deep learning techniques. If I end up leveraging deep learning models, this may be an interesting reference, concerning interpreting/analyzing/inspecting/debugging neural networks:
+
+		J. Parekh, S. Parekh, P. Mozharovskyi, F. d'Alché-Buc, and G. Richard, "Listen to Interpret: Post-hoc Interpretability for Audio Networks with NMF," in Advances in Neural Information Processing Systems, S. Koyejo, S. Mohamed, A. Agarwal, D. Belgrave, K. Cho, and A. Oh, Eds., vol. 35. Curran Associates, Inc., 2022, pp. 35270-35283. [Online]. Available: https://proceedings.neurips.cc/paper_files/paper/2022/file/e53280d73dd5389e820f4a6250365b0e-Paper-Conference.pdf
+
