@@ -1,0 +1,26 @@
+Project Member:
+	Jesse Hautala
+
+Project Topics:
+
+	Musical Audio Similarity
+
+	The overall concept is to create a tool for exploring neighborhoods in a music library, where neighboring music would have perceptible sonic similarities. This could be useful in finding particular songs of interest, building coherent playlists, and possibly helping to prioritize manual review/evaluation for labeling/annotation. The specific features to extract and the specific applications to apply to those features are subject to further development and revision.
+
+	Here is a rough roadmap of a possible course of development, in estimated chronological order:
+		1. Feature Extraction
+			harmonic information
+			fundamentals (i.e. "notes")
+			key
+			reference pitch
+			functional harmony (i.e. "chords"; these will be the primary terms/tokens)
+		2. Similarity Metrics
+			Jaccard Index
+			Cosine Similarity
+			TFIDF
+		3. Applications
+			Audio playback and visualization of extracted features
+			Search by similarity/dissimilarity
+			Playlist creation
+		4. Challenges
+			The primary challenge I anticipate is the prevalence of ambiguity, in everything from fundamental detection, through key identification, to the assignment of functional identities of chords. As a matter of expedience, this initial work will be primarily focused on functional harmony in the context of a twelve tone equal-tempered tuning system, but hopefully some of this development will also be extensible to a more comprehensive analytical framework.
