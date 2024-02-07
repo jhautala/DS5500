@@ -1,0 +1,85 @@
+\documentclass[12pt,english]{article}
+
+\usepackage[utf8]{inputenc}
+
+% bibliography stuff
+%\usepackage[numbers]{natbib}
+\usepackage[backend=biber,style=numeric]{biblatex}
+%\usepackage{biblatex}
+\addbibresource{references.bib}
+
+\usepackage{graphicx}
+\usepackage[margin=0.67in]{geometry}
+\usepackage[en-US,useregional]{datetime2}
+\usepackage{float}
+\usepackage{xcolor}
+\definecolor{linkblue}{HTML}{1F77B4}
+\usepackage[colorlinks=true, allcolors=linkblue]{hyperref}
+%\usepackage[colorlinks=true, linkcolor=linkblue, urlcolor=linkblue, citecolor=linkblue]{hyperref}
+%\usepackage[urlcolor=linkblue, citecolor=linkblue]{hyperref} % still draws a box around the ref links
+\usepackage{url}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+
+\newenvironment{fixmathspace}{\abovedisplayskip=0pt\abovedisplayshortskip=0pt\belowdisplayskip=0pt\belowdisplayshortskip=0pt\vspace{-\baselineskip}}{}
+
+
+\title{Harmonic Characterization of Musical Audio}
+\author{Jesse Hautala\\ \href{mailto:hautala.j@northeastern.edu}{hautala.j@northeastern.edu}}
+\date{2024-02-06}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This project aims to synthesize various techniques for musical audio signal processing into a hierarchical feature extraction pipeline, including note extraction, chord detection, and topic analysis from a corpus of musical pieces. The ultimate goal is to develop a robust system for song similarity search, music categorization, and playlist generation, on the basis of intrinsic features of musical audio data.
+\end{abstract}
+
+\section{Introduction}
+\subsection{Background}
+Audio signal processing, particularly in music, is a challenging yet rewarding field. The ability to understand and categorize music computationally opens numerous possibilities for music recommendation, generation, and analysis. Advanced tools like Melodyne have set a high standard in the industry for note extraction and manipulation, offering detailed segmentation of notes and their harmonics alongside a suite of editing capabilities (e.g. pitch, vibrato, amplitude, and duration).
+\newline
+
+\noindent
+This project aims to identify and utilize existing open source tools that are well suited to hierarchical feature extraction and provide a novel and intuitive solution for navigating a music library. While Melodyne offers a remarkable capacity for note extraction and manipulation, our goal is to achieve a similar level of precision in note extraction within an open source framework, focusing primarily on the extraction aspect rather than the manipulation of audio signals. We will proceed to build higher-level features from there and hopefully discover meaningful patterns through the lens of western harmony.
+
+\subsection{Problem Statement}
+The project focuses on the extraction of musical features from complex audio signals, the detection of chords, and the analysis of musical corpora. Despite the advancements in deep learning for audio processing, achieving high accuracy in tasks like note extraction and song similarity search remains challenging, especially in the context of complex musical compositions.
+\newline
+
+\noindent
+As a matter of expedience, this initial work is primarily focused on western ``functional harmony'' in the context of a twelve tone equal-tempered tuning system. Hopefully some of the tools and techniques explored and developed in the scope of this project will also be extensible to a more comprehensive analytical framework.
+
+\input{literature_review.tex}
+
+\input{methodology.tex}
+
+\section{Data Collection Plan}
+Assuming we can obtain access to the correct raw audio data, we would prefer to utilize community datasets such as the Million Song Dataset \cite{MillionSongDataset}, MagnaTagATune \cite{MagnaTagATune}, and MTG-Jamendo \cite{MTGJamendo}. These datasets offer a rich collection of songs and associated metadata, which could be useful for training and evaluating the proposed models. If we are unable to obtain a coherent corpus from community sources, our backup plan is to use audio data from personal collections, consisting of original recordings in WAV format and backup copies of commercial audio CDs in MP3 format.
+
+\begin{itemize}
+    \item The Million Song Dataset \cite{MillionSongDataset} is a rich collection of audio features and metadata for a substantial number of songs. Obtaining the corresponding raw audio data may prove to be a significant challenge.
+    \item MagnaTagATune provides a collection of music and annotations that should be amenable to the aims of this project, being offered by City University of London, under the Creative Commons Attribution – Noncommercial-Share Alike 3.0 license.
+    \item MTG-Jamendo also provides a large collection of labeled music under various Creative Commons licenses.
+\end{itemize}
+
+\section{Evaluation Plan}
+We will implement various forms of ad hoc, manual validation to qualitatively assess the relevance of final results. For example, in the context of note and chord extraction we can use our ears, musical instruments, and any extant musical transcriptions to assess accuracy, but to a large extent this development plan is in the domain of unsupervised learning. Where we have ground truth, we can compare our model against random, so-called ``null'' models, to assess whether it produces results that are better than guessing.
+
+%\section{Project Plan}
+%
+%something?
+
+%\section{Conclusion and Discussion}
+%The project aims to push the boundaries of current music processing techniques. By implementing and evaluating various algorithms, the project seeks to offer insights into the complexities of musical audio processing and contribute to the field of music information retrieval.
+
+%\bibliographystyle{plainnat}
+%\bibliography{references}
+%\printbibliography[heading=bibintoc, title={References}]
+\printbibliography
+
+\end{document}

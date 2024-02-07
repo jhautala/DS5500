@@ -1,0 +1,36 @@
+% !TEX root = proposal.tex
+
+\section{Literature Review (Related Works)}
+
+\subsection{General Overview}
+A few key works provide the foundation for our understanding of the state of the art:
+\begin{itemize}
+    \item Y. Bayle's compilation of resources \cite{Bayle2018} offers an extensive list of deep learning techniques applied to music, only recently transitioning to unmaintained status (around \href{https://github.com/ybayle/awesome-deep-learning-music/commit/b252aaf8d441173d4b23bcdd184f2d2fcd61d7cb#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5R1}{2023-12-15}).
+    \item H. Purwins et al. \cite{Purwins2019} provide a comprehensive overview of deep learning applications in audio signal processing.
+    \item Parekh et al. \cite{parekh2022listen} addresses interpretability of NN solutions, utilizing non-negative matrix factorization (NMF).
+\end{itemize}
+
+\subsection{Reference Annotations and Tools}
+To inform the process of generating annotations for notes and chords, we will review extant annotation schemas, including the Reference Annotations of the Centre for Digital Music \cite{IsophonicsReferenceAnnotations}, particularly the \textit{Reference Annotations: The Beatles} \cite{ReferenceAnnotationsBeatles} metadata.
+
+\subsection{Note Extraction}
+\begin{itemize}
+	\item Bay et al. \cite{bay2009evaluation} compare multiple techniques in \textit{Evaluation of multiple-f0 estimation and tracking systems}.
+	\item In one of the older papers we came across, Tolonen and Karjalainen \cite{tolonen2000computationally} present an efficient technique.
+	\item In another older paper, also focused on efficiency, Klapuri \cite{klapuri2006multiple} introduces the ``salience spectrum''.
+	\item Barbedo at al. \cite{barbedo2007high} extend Klapuri's work, in an iterative manner, that seems intuitive to me.
+	\item Heittola et al. \cite{heittola2009musical} introduce non-negative matrix factorization (or NMF).
+	\item Bittner et al. \cite{bittner2017deep} introduce deep learning methods.
+	\item In a more recent work, Won et al. \cite{won2020data} use a ``harmonic filter'' in front of a convolutional neural net.
+	\item Mariotte et al. \cite{mariotte2024explainable} perform comprehensive audio segmentation, again also using NMF, but not limited to musical audio (perhaps a bit too general, but involving interesting techniques).
+	\item Perhaps a bit specific for our purposes, Gómez et al. \cite{gomez2012predominant} approach fundamental extraction for flamenco vocals in the context of guitar accompaniment (so, a bit more complex than a monophonic sound source, but not as complex as arbitrary full ensemble context).
+\end{itemize}
+
+\newpage
+\subsection{Chord Detection}
+\begin{itemize}
+	\item Mauch et al. \cite{mauch2010approximate} focus on improving recognition of particularly challenging chords.
+	\item Jacoby et al. \cite{jacoby2015information} address many different encodings for functional harmonic concepts (e.g. function theory, root theory, and figured bass).
+	\item De Haas et al. \cite{de2011harmtrace} introduce the \textsc{HarmTrace} system of chord labeling.
+	\item I have not worked out how to access the paper yet but Magalhaes and De Haas \cite{magalhaes2011functional} report that they developed a powerful Haskell model for harmonic analysis.
+\end{itemize}
