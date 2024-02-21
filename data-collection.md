@@ -4,8 +4,8 @@ Reference: [MagnaTagATune List](https://github.com/keunwoochoi/magnatagatune-lis
 Steps: Download, unzip, copy to internal drive
 
 Overview output:
-	found 25863 files unique conformant MP3 files, in 16 directories,
-	representing 5405 musical pieces, 0 empty dirs and 0 unexpected files
+    found 25863 files unique conformant MP3 files, in 16 directories,
+    representing 5405 musical pieces, 0 empty dirs and 0 unexpected files
 
 Extracted Metadata (head):
 
@@ -32,4 +32,4 @@ Descriptive Stats:
 
 We can use some of the same tools we developed during initial experimentation, to analyze the official MagnmaTagATune data.
 
-<img src=proposal/qisp.png" width=600>
+<img src="proposal/qisp.png" width=600>
