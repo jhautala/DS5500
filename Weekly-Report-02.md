@@ -2,6 +2,9 @@
 
 Working on polyphonic pitch detection, it seems there are a number of ways to create sets of candidate frequencies for fundamentals. The magnitude of QISP-refined spectral peaks would be the most straightforward solution (from where I am in the project). Otherwise, there are a few established methods and an experimental method I have been working on.
 
+## Other Techniques
+I found [PITCH DETECTION METHODS REVIEW](https://ccrma.stanford.edu/~pdelac/154/m154paper.htm), which seems like a decent summary of a few diverse techniques.
+
 ## Experimental "Harmonic Kernel"
 I implemented a "harmonic kernel" solution (this seems conceptually similar to [Harmonic Product Spectrum](http://musicweb.ucsd.edu/~trsmyth/analysis/Harmonic_Product_Spectrum.html)) for detecting fundamental frequencies. The idea is to create a `1xN` kernel, with `N` frequency bins evenly spaced along a log2-scaled axis (e.g. bin zero would be an interval of zero cents, or a "unison"; bin 10 would represent an interval of ten cents, etc.). Then we populate the frequency bins with values between zero and one, following a distribution that peaks at intervals that match natural harmonics.
 
@@ -18,8 +21,10 @@ After tweaking the kernel shape a bit more, I was able to get fairly distinct ho
 
 <img src="figs/harm_kern_no_oct_time_norm.png" size=600>
 
-## Moving Forward
-Ultimately, I think there may not be a "perfect" kernel to use for such a solution, so at this point, I think it is best to choose a provisional solution for note extraction and proceed with the subsequent steps. Librosa supports pYIN, which seems like one of the strongest candidates, for performance reasons (including time performance, where it certainly outperforms my initial implementation of the "harmonic kernel" solution). CREPE seems to do better, but that is a CNN-based solution and initial tests with pYIN were very promising.
+Ultimately, I think there may not be a "perfect" kernel to use for such a solution, so at this point, I think it is best to choose a provisional solution for note extraction and proceed with the subsequent steps.
+
+## pYIN
+Librosa supports pYIN, which seems like one of the strongest candidates, for performance reasons (strong accuracy and time performance; it is much faster than my initial implementation of the "harmonic kernel" solution and almost as good as more complex models). CREPE seems to do better, but that is a CNN-based solution and initial tests with pYIN were very promising.
 
 <img src="figs/pyin.png" size=600>
 
@@ -49,5 +54,6 @@ In this paper on [Detecting Harmonic Change in Musical Audio](https://dl.acm.org
 
 Since I am focused on harmonic information, I may want to adopt their numbers and tradeoff some time resolution for frequency resolution.
 
-## Other Techniques
-I also found [PITCH DETECTION METHODS REVIEW](https://ccrma.stanford.edu/~pdelac/154/m154paper.htm), which seems like a decent summary of a few diverse techniques.
+## Moving Forward
+
+I need to try some methods of detecting note onset, to derive tempo/beat information. This will likely also inform note segmentation.
