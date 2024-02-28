@@ -27,11 +27,11 @@ I found something interesting when I accidentally loaded my test sample at a low
 
 <img src="figs/pyin_22050.png" size=600>
 
-I do not have a theoretical explanation yet, but it seems that low-frequency resolution has been directly and beneficially impacted by decreasing the sample rate. This is visible in the QISP-refined peaks. Compare the spectrograms above with this one (particaularly from ~E2 to A2).
+It took some thinking to determine what had happened. It seemed counter-intuitive that low-frequency resolution would be directly and beneficially impacted by decreasing the sample rate, but you can see the improvement in the QISP-refined peaks. Compare the spectrograms above with this one (particularly in the frequency range from ~E2 to A2).
 
 <img src="figs/beck_spec_22050.png" size=600>
 
-NOTE: This resolution issue should *not* be caused by QISP refinement; the signal we send to pYIN is only preprocessed via HPSS). If QISP were involved at all, it should actually improve the frequency resolution. At first I though it may be caused by interference from artifacts in higher frequencies that are mitigated by the lower high pass filter for 22050Hz, but then I remembered the area we are working in (i.e. post-FFT) is subject to the same fundamental limitations as the famous Heisenberg uncertainty principle; in the context of a spectrograph analysis of audio signals, the trade-off is between frequency (analogous to momentum/energy) and timing (as position).
+At first I though it may be caused by interference from artifacts in higher frequencies that are mitigated by the lower high pass filter for 22050Hz, but then I remembered the area we are working in (i.e. post-FFT) is subject to the same fundamental limitations as the famous Heisenberg uncertainty principle; in the context of a spectrograph analysis of audio signals, the trade-off is between frequency (analogous to momentum/energy) and timing (as position).
 
 In this context of frequency/timing tradeoff, the window size decides the weighting (smaller windows give better time resolution and larger windows give better frequency resolution) and when I accidentally halved the sample rate, my window size was essentially doubled.
 
