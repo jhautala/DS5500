@@ -31,9 +31,23 @@ I do not have a theoretical explanation yet, but it seems that low-frequency res
 
 <img src="figs/beck_spec_22050.png" size=600>
 
-NOTE: This resolution issue should *not* be caused by QISP refinement; it should actually be improved by it. I think it may have to do with the happenstance interaction between frequency bins and the specific notes in the signal. It may be caused by interference from artifacts in higher frequencies that are mitigated by the lower high pass filter for 22050Hz.
+NOTE: This resolution issue should *not* be caused by QISP refinement; the signal we send to pYIN is only preprocessed via HPSS). If QISP were involved at all, it should actually improve the frequency resolution. At first I though it may be caused by interference from artifacts in higher frequencies that are mitigated by the lower high pass filter for 22050Hz, but then I remembered the area we are working in (i.e. post-FFT) is subject to the same fundamental limitations as the famous Heisenberg uncertainty principle; in the context of a spectrograph analysis of audio signals, the trade-off is between frequency (analogous to momentum/energy) and timing (as position).
 
-This reminds me that we are working in an area where the famous Heisenberg uncertainty principle essentially comes into play: in the context of a wave analysis via FFT, the trade-off is between frequency (or momentum/velocity) and timing (or position). In the frequency/timing tradeoff, the window size decides the weighting (smaller windows give better time resolution and larger windows give better frequency resolution). In this paper on [Detecting Harmonic Change in Musical Audio](https://dl.acm.org/doi/pdf/10.1145/1178723.1178727), they seem to have chosen a larger window. I originally chose sr=44.1kHz, nfft=4096 -> ~93ms window size and 512-sample stride -> ~12ms stride. They chose window=743ms, stride=93ms. Since I am focused on harmonic information, I may want to adopt their numbers and tradeoff some time resolution for frequency resolution.
+In this context of frequency/timing tradeoff, the window size decides the weighting (smaller windows give better time resolution and larger windows give better frequency resolution) and when I accidentally halved the sample rate, my window size was essentially doubled.
+
+I originally chose:
+* sr=44.1kHz, nfft=4096 -> ~93ms window size
+* and 512-sample stride -> ~12ms stride
+
+I found better results via pYIN with:
+* sr=22050Hz, nfft=4096 -> ~186ms window size
+* and 512-sample stride -> ~23ms stride
+
+In this paper on [Detecting Harmonic Change in Musical Audio](https://dl.acm.org/doi/pdf/10.1145/1178723.1178727), they also chose a larger window, eight times larger than I originally intended:
+* window=743ms
+* stride=93ms
+
+Since I am focused on harmonic information, I may want to adopt their numbers and tradeoff some time resolution for frequency resolution.
 
 ## Other Techniques
 I also found [PITCH DETECTION METHODS REVIEW](https://ccrma.stanford.edu/~pdelac/154/m154paper.htm), which seems like a decent summary of a few diverse techniques.
