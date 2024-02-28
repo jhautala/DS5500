@@ -19,12 +19,19 @@ After tweaking the kernel shape a bit more, I was able to get fairly distinct ho
 <img src="figs/harm_kern_no_oct_time_norm.png" size=600>
 
 ## Moving Forward
-Ultimately, I think there may not be a "perfect" kernel to use for such a solution, so at this point, I think it is best to choose a provisional solution for note extraction and proceed with the subsequent steps. Librosa supports pYIN, which seems like one of the strongest candidates, for performance reasons (including time performance). CREPE seems to do better, but that is a CNN-based solution and initial tests with pYIN were very promising.
+Ultimately, I think there may not be a "perfect" kernel to use for such a solution, so at this point, I think it is best to choose a provisional solution for note extraction and proceed with the subsequent steps. Librosa supports pYIN, which seems like one of the strongest candidates, for performance reasons (including time performance, where it certainly outperforms my initial implementation of the "harmonic kernel" solution). CREPE seems to do better, but that is a CNN-based solution and initial tests with pYIN were very promising.
 
 <img src="figs/pyin.png" size=600>
 
-Unfortunately, I am unable to reproduce the most promising results I saw earlier (something has changed in my test environment and I have been unable to identify what). Hopefully they were valid results and I can reproduce them soon.
+I found something interesting when I accidentally loaded my test sample at a lower sample rate. It looks like maybe the implicit low-pass filter that comes along with lower sample rates actually improved fundamental detection via pYIN. Here we see the fundamentals detected actually follow the bassline much better than when sampled at 44.1kH.
 
+<img src="figs/pyin_22050.png" size=600>
+
+I do not have a theoretical explanation yet, but it seems that low-frequency resolution has been directly and beneficially impacted by decreasing the sample rate. This is visible in the QISP-refined peaks. Compare the spectrograms above with this one (particaularly from ~E2 to A2).
+
+NOTE: This resolution issue should *not* be caused by QISP refinement; it should actually be improved by it. I think it may have to do with the happenstance interaction between frequency bins and the specific notes in the signal. It may be caused by interference from artifacts in higher frequencies that are mitigated by the lower high pass filter for 22050Hz. This reminds me that we are working in an area where the famous Heisenberg uncertainty principle essentially comes into play: in the context of a wave analysis via FFT, the trade-off is between frequency (or momentum/velocity) and timing (or position).
+
+<img src="figs/beck_spec_22050.png" size=600>
 
 ## Other Techniques
 I also found [PITCH DETECTION METHODS REVIEW](https://ccrma.stanford.edu/~pdelac/154/m154paper.htm), which seems like a decent summary of a few diverse techniques.
