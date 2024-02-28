@@ -29,9 +29,11 @@ I found something interesting when I accidentally loaded my test sample at a low
 
 I do not have a theoretical explanation yet, but it seems that low-frequency resolution has been directly and beneficially impacted by decreasing the sample rate. This is visible in the QISP-refined peaks. Compare the spectrograms above with this one (particaularly from ~E2 to A2).
 
-NOTE: This resolution issue should *not* be caused by QISP refinement; it should actually be improved by it. I think it may have to do with the happenstance interaction between frequency bins and the specific notes in the signal. It may be caused by interference from artifacts in higher frequencies that are mitigated by the lower high pass filter for 22050Hz. This reminds me that we are working in an area where the famous Heisenberg uncertainty principle essentially comes into play: in the context of a wave analysis via FFT, the trade-off is between frequency (or momentum/velocity) and timing (or position).
-
 <img src="figs/beck_spec_22050.png" size=600>
+
+NOTE: This resolution issue should *not* be caused by QISP refinement; it should actually be improved by it. I think it may have to do with the happenstance interaction between frequency bins and the specific notes in the signal. It may be caused by interference from artifacts in higher frequencies that are mitigated by the lower high pass filter for 22050Hz.
+
+This reminds me that we are working in an area where the famous Heisenberg uncertainty principle essentially comes into play: in the context of a wave analysis via FFT, the trade-off is between frequency (or momentum/velocity) and timing (or position). In the frequency/timing tradeoff, the window size decides the weighting (smaller windows give better time resolution and larger windows give better frequency resolution). In this paper on [Detecting Harmonic Change in Musical Audio](https://dl.acm.org/doi/pdf/10.1145/1178723.1178727), they seem to have chosen a larger window. I originally chose sr=44.1kHz, nfft=4096 -> ~93ms window size and 512-sample stride -> ~12ms stride. They chose window=743ms, stride=93ms. Since I am focused on harmonic information, I may want to adopt their numbers and tradeoff some time resolution for frequency resolution.
 
 ## Other Techniques
 I also found [PITCH DETECTION METHODS REVIEW](https://ccrma.stanford.edu/~pdelac/154/m154paper.htm), which seems like a decent summary of a few diverse techniques.
