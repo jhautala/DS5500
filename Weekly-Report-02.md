@@ -28,11 +28,11 @@ Librosa supports pYIN, which seems like one of the strongest candidates, for per
 
 <img src="figs/pyin.png" size=600>
 
-I found something interesting when I accidentally loaded my test sample at a lower sample rate. It looks like maybe the implicit low-pass filter that comes along with lower sample rates actually improved fundamental detection via pYIN. Here we see the fundamentals detected actually follow the bassline much better than when sampled at 44.1kH.
+I found something interesting when I accidentally loaded a test file at a lower sample rate; I saw an *improvement* in fundamental detection via pYIN:
 
 <img src="figs/pyin_22050.png" size=600>
 
-It took some thinking to determine what had happened. It seemed counter-intuitive that low-frequency resolution would be directly and beneficially impacted by decreasing the sample rate, but you can see the improvement in the QISP-refined peaks. Compare the spectrograms above with this one (particularly in the frequency range from ~E2 to A2).
+It seemed counter-intuitive that low-frequency resolution would be directly and beneficially impacted by decreasing the sample rate, but you can see the improvement in the QISP-refined peaks. Compare the spectrograms above with this one (particularly in the frequency range from ~E2 to A2; the true bassline is E2 -> F#2 -> A).
 
 <img src="figs/beck_spec_22050.png" size=600>
 
