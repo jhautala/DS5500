@@ -19,3 +19,28 @@ I found that file count and duration were perfectly collinear, and file size was
 # Improving preprocessing time performance
 
 Again, due to the extensive loss of power, stretching through most of the weekend and into this week, I was unable to compute as much as I intended, but I was able to develop a [work queue utility](https://github.com/jhautala/phonemes/blob/main/src/utils/work.py) for distributing work items to separate processes for collection by a manager process. This should allow me to scale my preprocessing task to saturate my compute capacity and improve throughput for subsequent iterations. Since my utility is abstract, and I carefully handle errors, logging, and such, it will be useful in other similar tasks where I want to distribute work to sub-processes.
+
+A simple example shows that there is still some boilerplate for a "good" `Worker` class (i.e. with its own logger):
+
+```python
+class EgWorker(Worker):
+    _class_logger = module_logger.getChild(__qualname__)
+
+    def __init__(self, *args, **kwargs):
+        self.logger = self._class_logger.getChild(str(uuid4()))
+        super().__init__(*args, **kwargs)
+
+    def process_data(self, work_item: int) -> str:
+        self.logger.info(f'Processing work item: {work_item}')
+        return f'Finished {work_item}'
+```
+
+Usage is quite concise:
+
+```python
+num_workers = 4  # degree of parallelism
+raw_items = range(20)  # a simulated work load
+with Manager(EgWorker, num_workers) as manager:
+    for processed_item in manager.process_items(raw_items):
+        print(processed_item)
+```
